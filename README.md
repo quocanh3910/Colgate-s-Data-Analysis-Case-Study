@@ -37,11 +37,26 @@ The raw data consisted of three primary sources:
 
 2. **Root Cause Analysis**
    - Shift Performance: Night-3 shift shows extreme downtime spikes (~50% in Feb–Mar).
-   - Downtime Drivers: Planned Maintenance only 10–12% of total; unplanned dominates, mainly "02-Quality – 0202-Rework".
 
+![image_url](https://github.com/quocanh3910/Colgate-s-Data-Analysis-Case-Study/blob/edebda35b5682b541435640ffbbf7c3bab97f490/Reasons%20for%20downtime%20rate.png)
+   - Downtime Drivers: Planned Maintenance only 10–12% of total; unplanned dominates, mainly "02-Quality – 0202-Rework".
+![image_url](https://github.com/quocanh3910/Colgate-s-Data-Analysis-Case-Study/blob/cd53a4534e698cf0fb71129dc2c27eae09bb9d65/Distribution%20of%20planned%20maintenance%20by%20machines.png)
 3. **Business Impact Modeling (VAR)**
-   - **Granger Causality:** Downtime leads availability degradation.
-   - **FEVD:** Downtime explains ~60% of availability variance; defect rate driven by downtime shocks.
+   - **FEVD:** Downtime mainly explain itselfs, with the contribution of effective run time of machines and the quality of product; defect rate driven by downtime shocks as well as changeover duration between machines and quality of product
+
+### FORECAST ERROR VARIANCE DECOMPOSITION (FEVD) FOR DOWNTIME VARIABLE
+| Period | Variable | DOWNTIME  | defect_rate | RUN_TIME  | CHANGEOVER_DURATION | Availability | Performance | Quality |
+|--------|----------|-----------|-------------|----------|-------------------|-------------|------------|--------|
+| 1      | DOWNTIME | 82.42%    | 4.77%       | 1.92%    | 4.18%             | 1.35%       | 0.23%      | 5.14%  |
+| 4      | DOWNTIME | 70.66%    | 7.24%       | 9.22%    | 3.12%             | 1.89%       | 1.98%      | 5.89%  |
+| 8      | DOWNTIME | 63.94%    | 8.76%       | 13.34%   | 2.64%             | 2.08%       | 2.81%      | 6.43%  |
+
+#### FORECAST ERROR VARIANCE DECOMPOSITION (FEVD) FOR DEFECT RATE VARIABLE
+| Period | Variable    | DOWNTIME | defect_rate | RUN_TIME | CHANGEOVER_DURATION | Availability | Performance | Quality |
+|--------|------------|----------|-------------|---------|-------------------|-------------|------------|--------|
+| 1      | defect_rate | 40.43%   | 43.48%      | 0.00%   | 9.50%             | 0.84%       | 0.17%      | 5.58%  |
+| 4      | defect_rate | 43.35%   | 38.83%      | 1.01%   | 9.67%             | 1.10%       | 0.44%      | 5.60%  |
+| 8      | defect_rate | 42.81%   | 37.37%      | 2.83%   | 9.12%             | 1.23%       | 0.81%      | 5.83%  |
 
 ## Key Findings
 - **Systemic Reactive Culture:** High ratio of unplanned to planned maintenance.
